@@ -1,6 +1,7 @@
 'use strict';
 
 // load modules
+const cors = require('cors');
 const express = require('express');
 const morgan = require('morgan');
 const apiRoute = require('./routes/api');
@@ -12,6 +13,9 @@ const enableGlobalErrorLogging =
 
 // create the Express app
 const app = express();
+
+// enable all cors requests
+app.use(cors());
 
 // Setup request body JSON parsing.
 app.use(express.json());
