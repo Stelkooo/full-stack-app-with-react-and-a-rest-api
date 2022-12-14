@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Header from './components/Header';
 import Courses from './components/Courses';
@@ -12,6 +13,7 @@ const App = () => {
   return (
     <>
       <Header />
+      <main></main>
     </>
   );
 };
