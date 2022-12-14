@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# project files
+/full_stack_app_with_react_and_a_rest_api-v1
