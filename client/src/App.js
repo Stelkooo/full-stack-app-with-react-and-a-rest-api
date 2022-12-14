@@ -1,13 +1,9 @@
-function App() {
-  return (
-    <header>
-      <div className='wrap header--flex'>
-        <h1 className='header--logo'>
-          <a>Courses</a>
-        </h1>
-      </div>
-    </header>
-  );
-}
+import React from 'react';
+
+import Header from './components/Header';
+
+const App = () => {
+  return <Header />;
+};
 
 export default App;
