@@ -1,6 +1,6 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 export default function UserSignOut() {
-  return <Redirect to='/' />;
+  return <Navigate to='/' />;
 }
