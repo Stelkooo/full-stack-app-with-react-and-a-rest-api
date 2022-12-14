@@ -3,7 +3,7 @@ import React from 'react';
 export default class CourseDetail extends React.Component {
   render() {
     return (
-      <main>
+      <>
         <div className='actions--bar'>
           <div className='wrap'>
             <a className='button'>Update Course</a>
@@ -32,7 +32,7 @@ export default class CourseDetail extends React.Component {
             </div>
           </form>
         </div>
-      </main>
+      </>
     );
   }
 }

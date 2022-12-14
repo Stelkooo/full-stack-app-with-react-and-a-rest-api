@@ -3,7 +3,7 @@ import React from 'react';
 export default class CreateCourse extends React.Component {
   render() {
     return (
-      <main>
+      <>
         <div className='wrap'>
           <h2>Create Course</h2>
           <div className='validation--errors'>
@@ -52,7 +52,7 @@ export default class CreateCourse extends React.Component {
             <button className='button button-secondary'>Cancel</button>
           </form>
         </div>
-      </main>
+      </>
     );
   }
 }

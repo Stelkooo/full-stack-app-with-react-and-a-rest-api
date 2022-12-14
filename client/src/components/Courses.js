@@ -3,7 +3,7 @@ import React from 'react';
 export default class Courses extends React.Component {
   render() {
     return (
-      <main>
+      <>
         <div className='wrap main--grid'>
           <a className='course--module course--link'>
             <h2 className='course--label'>Course</h2>
@@ -25,7 +25,7 @@ export default class Courses extends React.Component {
             </span>
           </a>
         </div>
-      </main>
+      </>
     );
   }
 }

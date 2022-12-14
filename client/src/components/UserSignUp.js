@@ -3,7 +3,7 @@ import React from 'react';
 export default class UserSignUp extends React.Component {
   render() {
     return (
-      <main>
+      <>
         <div className='form--centered'>
           <h2>Sign Up</h2>
           <form>
@@ -43,7 +43,7 @@ export default class UserSignUp extends React.Component {
             Already have a user account? Click here to <a>sign in</a>!
           </p>
         </div>
-      </main>
+      </>
     );
   }
 }

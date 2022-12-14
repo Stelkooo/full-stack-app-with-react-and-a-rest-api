@@ -3,7 +3,7 @@ import React from 'react';
 export default class UpdateCourse extends React.Component {
   render() {
     return (
-      <main>
+      <>
         <div className='wrap'>
           <h2>Update Course</h2>
           <form>
@@ -45,7 +45,7 @@ export default class UpdateCourse extends React.Component {
             <button className='button button-secondary'>Cancel</button>
           </form>
         </div>
-      </main>
+      </>
     );
   }
 }
