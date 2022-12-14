@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Header from './components/Header';
+import CreateCourse from './components/CreateCourse';
 import UpdateCourse from './components/UpdateCourse';
 
 const App = () => {
