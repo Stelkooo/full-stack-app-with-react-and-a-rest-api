@@ -54,7 +54,14 @@ router.get(
           attributes: ['firstName', 'lastName', 'emailAddress'],
         },
       ],
-      attributes: ['id', 'title', 'description', 'materialsNeeded', 'userId'],
+      attributes: [
+        'id',
+        'title',
+        'description',
+        'materialsNeeded',
+        'estimatedTime',
+        'userId',
+      ],
     });
 
     res.status(200).json({
@@ -75,7 +82,14 @@ router.get(
           attributes: ['firstName', 'lastName', 'emailAddress'],
         },
       ],
-      attributes: ['id', 'title', 'description', 'materialsNeeded', 'userId'],
+      attributes: [
+        'id',
+        'title',
+        'description',
+        'materialsNeeded',
+        'estimatedTime',
+        'userId',
+      ],
     });
 
     res.status(200).json({
