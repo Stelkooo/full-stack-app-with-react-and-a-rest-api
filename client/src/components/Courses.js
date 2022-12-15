@@ -1,14 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-export default function Courses() {
+export default function Courses({
+  context: {
+    actions: { getCourses },
+  },
+}) {
+  const [courses, setCourses] = useState([]);
+
+  useEffect(() => {
+    getCourses().then((data) => setCourses(data));
+  }, []);
+
   return (
     <>
       <div className='wrap main--grid'>
-        <a className='course--module course--link'>
-          <h2 className='course--label'>Course</h2>
-          <h3 className='course--title'>Course Title</h3>
-        </a>
-        <a className='course--module course--add--module'>
+        {courses.map((course) => {
+          return (
+            <a
+              key={course.id}
+              className='course--module course--link'
+              href={`/courses/${course.id}`}
+            >
+              <h2 className='course--label'>Course</h2>
+              <h3 className='course--title'>{course.title}</h3>
+            </a>
+          );
+        })}
+        <a
+          className='course--module course--add--module'
+          href='/courses/create'
+        >
           <span className='course--add--title'>
             <svg
               version='1.1'
