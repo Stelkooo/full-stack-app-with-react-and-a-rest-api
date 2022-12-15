@@ -10,6 +10,10 @@ import CreateCourse from './components/CreateCourse';
 import UpdateCourse from './components/UpdateCourse';
 import UserSignOut from './components/UserSignOut';
 
+import withContext from './Context';
+
+const CoursesWithContext = withContext(Courses);
+
 const App = () => {
   return (
     <Router>
@@ -19,7 +23,7 @@ const App = () => {
           <Route
             exact
             path='/'
-            element={<Courses />}
+            element={<CoursesWithContext />}
           />
           <Route
             path='/courses/create'
