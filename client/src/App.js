@@ -13,6 +13,7 @@ import UserSignOut from './components/UserSignOut';
 import withContext from './Context';
 
 const CoursesWithContext = withContext(Courses);
+const CourseDetailWithContext = withContext(CourseDetail);
 
 const App = () => {
   return (
@@ -35,7 +36,7 @@ const App = () => {
           />
           <Route
             path='/courses/:id'
-            element={<CourseDetail />}
+            element={<CourseDetailWithContext />}
           />
           <Route
             path='/signin'
