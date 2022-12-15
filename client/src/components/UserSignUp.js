@@ -6,25 +6,25 @@ export default function UserSignUp() {
       <div className='form--centered'>
         <h2>Sign Up</h2>
         <form>
-          <label for='firstName'>First Name</label>
+          <label htmlFor='firstName'>First Name</label>
           <input
             id='firstName'
             name='firstName'
             type='text'
           />
-          <label for='lastName'>Last Name</label>
+          <label htmlFor='lastName'>Last Name</label>
           <input
             id='lastName'
             name='lastName'
             type='text'
           />
-          <label for='emailAddress'>Email Address</label>
+          <label htmlFor='emailAddress'>Email Address</label>
           <input
             id='emailAddress'
             name='emailAddress'
             type='email'
           />
-          <label for='password'>Password</label>
+          <label htmlFor='password'>Password</label>
           <input
             id='password'
             name='password'

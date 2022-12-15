@@ -8,27 +8,27 @@ export default function UpdateCourse() {
         <form>
           <div className='main--flex'>
             <div>
-              <label for='courseTitle'>Course Title</label>
+              <label htmlFor='courseTitle'>Course Title</label>
               <input
                 id='courseTitle'
                 name='courseTitle'
                 type='text'
               />
               <p>By Joe Smith</p>
-              <label for='courseDescription'>Course Description</label>
+              <label htmlFor='courseDescription'>Course Description</label>
               <textarea
-                for='courseDescription'
+                htmlFor='courseDescription'
                 name='courseDescription'
               ></textarea>
             </div>
             <div>
-              <label for='estimatedTime'>Estimated Time</label>
+              <label htmlFor='estimatedTime'>Estimated Time</label>
               <input
                 id='estimatedTime'
                 name='estimatedTime'
                 type='text'
               />
-              <label for='materialsNeeded'>Materials Needed</label>
+              <label htmlFor='materialsNeeded'>Materials Needed</label>
               <textarea
                 id='materialsNeeded'
                 name='materialsNeeded'
