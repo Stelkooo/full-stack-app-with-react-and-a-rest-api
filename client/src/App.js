@@ -19,31 +19,31 @@ const App = () => {
           <Route
             exact
             path='/'
-            component={Courses}
+            element={<Courses />}
           />
           <Route
             path='/courses/create'
-            component={CreateCourse}
+            element={<CreateCourse />}
           />
           <Route
             path='/courses/:id/update'
-            component={UpdateCourse}
+            element={<UpdateCourse />}
           />
           <Route
             path='/courses/:id'
-            component={CourseDetail}
+            element={<CourseDetail />}
           />
           <Route
             path='/signin'
-            component={UserSignIn}
+            element={<UserSignIn />}
           />
           <Route
             path='/signup'
-            component={UserSignUp}
+            element={<UserSignUp />}
           />
           <Route
             path='/signout'
-            component={UserSignOut}
+            element={<UserSignOut />}
           />
         </Routes>
       </main>
