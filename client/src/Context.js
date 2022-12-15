@@ -14,6 +14,7 @@ export class Provider extends React.Component {
       data: this.data,
       actions: {
         getCourses: this.getCourses,
+        getCourse: this.getCourse,
       },
     };
 
@@ -25,6 +26,11 @@ export class Provider extends React.Component {
   getCourses = async () => {
     const courses = await this.data.getCourses();
     return courses;
+  };
+
+  getCourse = async (id) => {
+    const course = await this.data.getCourse(id);
+    return course;
   };
 }
 
