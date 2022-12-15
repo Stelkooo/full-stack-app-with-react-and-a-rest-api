@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
+import { Link } from 'react-router-dom';
 
 export default function CourseDetail({ context }) {
   const { id } = useParams();
@@ -8,52 +9,91 @@ export default function CourseDetail({ context }) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    context.data
-      .getCourse(id)
-      .then((data) => setCourse(data))
-      .then(setIsLoading(false))
-      .then(console.log(course));
+    context.data.getCourse(id).then((data) => {
+      setCourse(data);
+      setIsLoading(false);
+    });
   }, []);
 
-  return (
+  const formatDescription = () => {
+    if (course.description) {
+      const splitDescription = course.description.split('\n');
+      let blanksRemovedDescription = [];
+      splitDescription.forEach((e) => {
+        if (e !== '') {
+          blanksRemovedDescription.push(e);
+        }
+      });
+
+      return blanksRemovedDescription.map((e, index) => {
+        return <p key={index}>{e}</p>;
+      });
+    }
+  };
+
+  const handleDeleteCourse = () => {
+    context.data.deleteCourse(id);
+  };
+
+  const formatMaterialsNeeded = () => {
+    let splitMaterials = course.materialsNeeded.split('\n');
+
+    return splitMaterials.map((e, index) => {
+      return <li key={index}>{e.slice(2)}</li>;
+    });
+  };
+
+  return !isLoading ? (
     <>
-      {isLoading ? null : (
-        <>
-          <div className='actions--bar'>
-            <div className='wrap'>
-              <a
-                className='button'
-                href={`/courses/${id}/update`}
-              >
-                Update Course
-              </a>
-              <a className='button'>Delete Course</a>
-              <a className='button button-secondary'>Return to List</a>
+      <div className='actions--bar'>
+        <div className='wrap'>
+          <Link
+            className='button'
+            to={`/courses/${id}/update`}
+          >
+            Update Course
+          </Link>
+          <button
+            className='button'
+            onClick={handleDeleteCourse}
+          >
+            Delete Course
+          </button>
+          <Link
+            className='button button-secondary'
+            to='/'
+          >
+            Return to List
+          </Link>
+        </div>
+      </div>
+      <div className='wrap'>
+        <h2>Course Detail</h2>
+        <form>
+          <div className='main--flex'>
+            <div>
+              <h3 className='course--detail--title'>Course</h3>
+              <h4 className='course--name'>{course.title}</h4>
+              <p>
+                By {course.user.firstName} {course.user.lastName}
+              </p>
+              {formatDescription()}
+            </div>
+            <div>
+              <h3 className='course--detail--title'>Estimated Time</h3>
+              <p>{course.estimatedTime ? course.estimatedTime : `N/A`}</p>
+              <h3 className='course--detail--title'>Materials Needed</h3>
+              {course.materialsNeeded ? (
+                <ul className='course--detail--list'>
+                  {formatMaterialsNeeded()}
+                </ul>
+              ) : (
+                <p>No materials needed</p>
+              )}
             </div>
           </div>
-          <div className='wrap'>
-            <h2>Course Detail</h2>
-            <form>
-              <div className='main--flex'>
-                <div>
-                  <h3 className='course--detail--title'>Course</h3>
-                  <h4 className='course--name'>{course.title}</h4>
-                  <p>By</p>
-                  <p>{course.description}</p>
-                </div>
-                <div>
-                  <h3 className='course--detail--title'>Estimated Time</h3>
-                  <p>14 hours</p>
-                  <h3 className='course--detail--title'>Materials Needed</h3>
-                  <ul className='course--detail--list'>
-                    <li>Example material</li>
-                  </ul>
-                </div>
-              </div>
-            </form>
-          </div>
-        </>
-      )}
+        </form>
+      </div>
     </>
-  );
+  ) : null;
 }

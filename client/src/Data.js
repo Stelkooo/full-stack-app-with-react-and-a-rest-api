@@ -51,4 +51,10 @@ export default class Data {
       throw new Error();
     }
   }
+
+  async deleteCourse(id) {
+    const response = await this.api(`/courses/${id}`, 'DELETE');
+
+    return response.status;
+  }
 }
