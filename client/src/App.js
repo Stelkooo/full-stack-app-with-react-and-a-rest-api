@@ -14,6 +14,7 @@ import withContext from './Context';
 
 const CoursesWithContext = withContext(Courses);
 const CourseDetailWithContext = withContext(CourseDetail);
+const UserSignInWithContext = withContext(UserSignIn);
 
 const App = () => {
   return (
@@ -40,7 +41,7 @@ const App = () => {
           />
           <Route
             path='/signin'
-            element={<UserSignIn />}
+            element={<UserSignInWithContext />}
           />
           <Route
             path='/signup'
