@@ -1,34 +1,71 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-export default function UserSignUp() {
+export default function UserSignUp({ context }) {
+  const [firstName, setFirstName] = useState();
+  const [lastName, setLastName] = useState();
+  const [username, setUsername] = useState();
+  const [password, setPassword] = useState();
+  const [errors, setErrors] = useState([]);
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const body = {
+      firstName,
+      lastName,
+      emailAddress: username,
+      password,
+    };
+    context.data.createUser(body).then((errors) => {
+      if (errors.length) {
+        setErrors(errors);
+      } else {
+        context.actions.signIn(body.emailAddress, body.password).then(() => {
+          if (location.state?.form) {
+            navigate(location.state.from);
+          } else {
+            navigate('/');
+          }
+        });
+      }
+    });
+  };
+
   return (
     <>
       <div className='form--centered'>
         <h2>Sign Up</h2>
-        <form>
+        <form onSubmit={handleSubmit}>
           <label htmlFor='firstName'>First Name</label>
           <input
             id='firstName'
             name='firstName'
             type='text'
+            onChange={(e) => setFirstName(e.target.value)}
           />
           <label htmlFor='lastName'>Last Name</label>
           <input
             id='lastName'
             name='lastName'
             type='text'
+            onChange={(e) => setLastName(e.target.value)}
           />
-          <label htmlFor='emailAddress'>Email Address</label>
+          <label htmlFor='username'>Email Address</label>
           <input
-            id='emailAddress'
-            name='emailAddress'
+            id='username'
+            name='username'
             type='email'
+            onChange={(e) => setUsername(e.target.value)}
           />
           <label htmlFor='password'>Password</label>
           <input
             id='password'
             name='password'
             type='password'
+            onChange={(e) => setPassword(e.target.value)}
           />
           <button
             className='button'
@@ -36,10 +73,16 @@ export default function UserSignUp() {
           >
             Sign Up
           </button>
-          <button className='button'>Cancel</button>
+          <Link
+            className='button'
+            to={'/'}
+          >
+            Cancel
+          </Link>
         </form>
         <p>
-          Already have a user account? Click here to <a>sign in</a>!
+          Already have a user account? Click here to{' '}
+          <Link to={'/signin'}>sign in</Link>!
         </p>
       </div>
     </>

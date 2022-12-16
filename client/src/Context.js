@@ -22,6 +22,7 @@ export class Provider extends React.Component {
       actions: {
         getCourses: this.getCourses,
         signIn: this.signIn,
+        signUp: this.signUp,
       },
     };
 
