@@ -92,13 +92,7 @@ export default function UserSignUp({ context }) {
         </form>
         <p>
           Already have a user account? Click here to{' '}
-          <Link
-            to={'/signin'}
-            state={{ from: location.state?.from }}
-          >
-            sign in
-          </Link>
-          !
+          <Link to={'/signin'}>sign in</Link>!
         </p>
       </div>
     </>
