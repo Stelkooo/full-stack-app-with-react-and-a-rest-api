@@ -17,6 +17,7 @@ const CourseDetailWithContext = withContext(CourseDetail);
 const UserSignInWithContext = withContext(UserSignIn);
 const UserSignUpWithContext = withContext(UserSignUp);
 const CreateCourseWithContext = withContext(CreateCourse);
+const UpdateCourseWithContext = withContext(UpdateCourse);
 
 const App = () => {
   return (
@@ -35,7 +36,7 @@ const App = () => {
           />
           <Route
             path='/courses/:id/update'
-            element={<UpdateCourse />}
+            element={<UpdateCourseWithContext />}
           />
           <Route
             path='/courses/:id'
