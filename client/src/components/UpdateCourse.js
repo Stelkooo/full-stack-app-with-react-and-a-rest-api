@@ -53,6 +53,16 @@ export default function UpdateCourse({ context }) {
     <>
       <div className='wrap'>
         <h2>Update Course</h2>
+        {errors.length ? (
+          <div className='validation--errors'>
+            <h3>Validation Errors</h3>
+            <ul>
+              {errors.map((error, index) => (
+                <li key={index}>{error}</li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
         <form onSubmit={handleSubmit}>
           <div className='main--flex'>
             <div>

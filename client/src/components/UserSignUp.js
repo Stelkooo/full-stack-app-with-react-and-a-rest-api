@@ -38,6 +38,16 @@ export default function UserSignUp({ context }) {
     <>
       <div className='form--centered'>
         <h2>Sign Up</h2>
+        {errors.length ? (
+          <div className='validation--errors'>
+            <h3>Validation Errors</h3>
+            <ul>
+              {errors.map((error, index) => (
+                <li key={index}>{error}</li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
         <form onSubmit={handleSubmit}>
           <label htmlFor='firstName'>First Name</label>
           <input
