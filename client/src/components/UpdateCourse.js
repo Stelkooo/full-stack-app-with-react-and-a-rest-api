@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 export default function UpdateCourse({ context }) {
   const { id } = useParams();
@@ -11,6 +11,9 @@ export default function UpdateCourse({ context }) {
   const [description, setDescription] = useState(null);
   const [estimatedTime, setEstimatedTime] = useState(null);
   const [materialsNeeded, setMaterialsNeeded] = useState(null);
+  const [errors, setErrors] = useState([]);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     context.data.getCourse(id).then((data) => {
@@ -26,7 +29,7 @@ export default function UpdateCourse({ context }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const body = {
-      userId: 1,
+      userId: context.authenticatedUser?.id,
       title,
       description,
       estimatedTime,
@@ -34,10 +37,16 @@ export default function UpdateCourse({ context }) {
     };
     context.data
       .updateCourse(id, body, {
-        emailAddress: 'joe@smith.com',
-        password: 'joepassword',
+        emailAddress: context.authenticatedUser?.emailAddress,
+        password: localStorage.getItem('password'),
       })
-      .then((errors) => console.log(errors));
+      .then((errors) => {
+        if (errors.length) {
+          setErrors(errors);
+        } else {
+          navigate('/');
+        }
+      });
   };
 
   return !isLoading ? (

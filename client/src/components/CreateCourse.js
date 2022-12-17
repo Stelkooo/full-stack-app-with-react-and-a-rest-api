@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function CreateCourse({ context }) {
   const [title, setTitle] = useState(null);
@@ -8,10 +8,12 @@ export default function CreateCourse({ context }) {
   const [materialsNeeded, setMaterialsNeeded] = useState(null);
   const [errors, setErrors] = useState([]);
 
+  const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const body = {
-      userId: 1,
+      userId: context.authenticatedUser?.id,
       title,
       description,
       estimatedTime,
@@ -19,12 +21,14 @@ export default function CreateCourse({ context }) {
     };
     context.data
       .createCourse(body, {
-        emailAddress: 'joe@smith.com',
-        password: 'joepassword',
+        emailAddress: context.authenticatedUser?.emailAddress,
+        password: localStorage.getItem('password'),
       })
       .then((errors) => {
         if (errors.length) {
           setErrors(errors);
+        } else {
+          navigate('/');
         }
       });
   };
@@ -81,7 +85,7 @@ export default function CreateCourse({ context }) {
             className='button'
             type='submit'
           >
-            Update Course
+            Create Course
           </button>
           <Link
             className='button button-secondary'
