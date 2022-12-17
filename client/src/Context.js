@@ -1,4 +1,5 @@
 import React from 'react';
+import Cookies from 'js-cookie';
 import Data from './Data';
 
 const Context = React.createContext();
@@ -11,8 +12,9 @@ export class Provider extends React.Component {
   constructor() {
     super();
     this.data = new Data();
+    this.cookie = Cookies.get('authenticatedUser');
     this.state = {
-      authenticatedUser: null,
+      authenticatedUser: this.cookie ? JSON.parse(this.cookie) : null,
     };
   }
 
@@ -41,12 +43,16 @@ export class Provider extends React.Component {
           authenticatedUser: user,
         };
       });
+      Cookies.set('authenticatedUser', JSON.stringify(user), { expires: 1 });
+      localStorage.setItem('password', password);
     }
     return user;
   };
 
   signOut = () => {
     this.setState({ authenticatedUser: null });
+    Cookies.remove('authenticatedUser');
+    localStorage.removeItem('password');
   };
 }
 
