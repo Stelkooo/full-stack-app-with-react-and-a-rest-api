@@ -14,6 +14,7 @@ export default function UserSignIn({ context }) {
       if (user === null) {
         console.log('Sign-in failed');
       } else {
+        console.log(location);
         if (location.state?.form) {
           navigate(location.state.from);
         } else {
@@ -50,14 +51,25 @@ export default function UserSignIn({ context }) {
           </button>
           <Link
             className='button'
-            to={'/'}
+            to={{
+              pathname: `/`,
+              state: { prevPath: location.pathname },
+            }}
           >
             Cancel
           </Link>
         </form>
         <p>
           Don't have a user account? Click here to{' '}
-          <Link to={'/signup'}>sign up</Link>!
+          <Link
+            to={{
+              pathname: `/signup`,
+              state: { prevPath: location.pathname },
+            }}
+          >
+            sign up
+          </Link>
+          !
         </p>
       </div>
     </>

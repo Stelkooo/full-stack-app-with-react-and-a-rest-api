@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 export default function Courses({ context }) {
   const [courses, setCourses] = useState([]);
+
+  const location = useLocation();
 
   useEffect(() => {
     context.data.getCourses().then((data) => setCourses(data));
@@ -12,14 +15,17 @@ export default function Courses({ context }) {
       <div className='wrap main--grid'>
         {courses.map((course) => {
           return (
-            <a
+            <Link
               key={course.id}
               className='course--module course--link'
-              href={`/courses/${course.id}`}
+              to={{
+                pathname: `/courses/${course.id}`,
+                state: { prevPath: location.pathname },
+              }}
             >
               <h2 className='course--label'>Course</h2>
               <h3 className='course--title'>{course.title}</h3>
-            </a>
+            </Link>
           );
         })}
         <a

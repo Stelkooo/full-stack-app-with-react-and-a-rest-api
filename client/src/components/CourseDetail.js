@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import { useLocation, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 
 export default function CourseDetail({ context }) {
@@ -7,6 +7,8 @@ export default function CourseDetail({ context }) {
 
   const [course, setCourse] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+
+  const location = useLocation();
 
   useEffect(() => {
     context.data.getCourse(id).then((data) => {
@@ -49,7 +51,10 @@ export default function CourseDetail({ context }) {
         <div className='wrap'>
           <Link
             className='button'
-            to={`/courses/${id}/update`}
+            to={{
+              pathname: `/courses/${id}/update`,
+              state: { prevPath: location.pathname },
+            }}
           >
             Update Course
           </Link>
@@ -61,7 +66,10 @@ export default function CourseDetail({ context }) {
           </button>
           <Link
             className='button button-secondary'
-            to='/'
+            to={{
+              pathname: `/`,
+              state: { prevPath: location.pathname },
+            }}
           >
             Return to List
           </Link>
