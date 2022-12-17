@@ -14,8 +14,7 @@ export default function UserSignIn({ context }) {
       if (user === null) {
         console.log('Sign-in failed');
       } else {
-        console.log(location);
-        if (location.state?.form) {
+        if (location.state?.from) {
           navigate(location.state.from);
         } else {
           navigate('/');

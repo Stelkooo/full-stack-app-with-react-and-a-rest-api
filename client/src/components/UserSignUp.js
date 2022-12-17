@@ -24,7 +24,7 @@ export default function UserSignUp({ context }) {
         setErrors(errors);
       } else {
         context.actions.signIn(body.emailAddress, body.password).then(() => {
-          if (location.state?.form) {
+          if (location.state?.from) {
             navigate(location.state.from);
           } else {
             navigate('/');
@@ -82,7 +82,13 @@ export default function UserSignUp({ context }) {
         </form>
         <p>
           Already have a user account? Click here to{' '}
-          <Link to={'/signin'}>sign in</Link>!
+          <Link
+            to={'/signin'}
+            state={{ from: location.state?.from }}
+          >
+            sign in
+          </Link>
+          !
         </p>
       </div>
     </>

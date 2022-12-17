@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 export default function Header({ context }) {
@@ -8,14 +8,7 @@ export default function Header({ context }) {
     <header>
       <div className='wrap header--flex'>
         <h1 className='header--logo'>
-          <Link
-            to={{
-              pathname: `/`,
-              state: { prevPath: location.pathname },
-            }}
-          >
-            Courses
-          </Link>
+          <Link to={'/'}>Courses</Link>
         </h1>
         <nav className='header--signedout'>
           <ul>
@@ -24,10 +17,8 @@ export default function Header({ context }) {
                 `Welcome, ${context.authenticatedUser.firstName} ${context.authenticatedUser.lastName}!`
               ) : (
                 <Link
-                  to={{
-                    pathname: `/signup`,
-                    state: { prevPath: location.pathname },
-                  }}
+                  to={`/signup`}
+                  state={{ from: location.pathname }}
                 >
                   Sign Up
                 </Link>
@@ -35,20 +26,11 @@ export default function Header({ context }) {
             </li>
             <li>
               {context.authenticatedUser ? (
-                <Link
-                  to={{
-                    pathname: `/signout`,
-                    state: { prevPath: location.pathname },
-                  }}
-                >
-                  Sign Out
-                </Link>
+                <Link to={`/signout`}>Sign Out</Link>
               ) : (
                 <Link
-                  to={{
-                    pathname: `/signin`,
-                    state: { prevPath: location.pathname },
-                  }}
+                  to={`/signin`}
+                  state={{ from: location.pathname }}
                 >
                   Sign In
                 </Link>

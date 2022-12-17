@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 export default function UpdateCourse({ context }) {
   const { id } = useParams();
@@ -11,8 +11,6 @@ export default function UpdateCourse({ context }) {
   const [description, setDescription] = useState(null);
   const [estimatedTime, setEstimatedTime] = useState(null);
   const [materialsNeeded, setMaterialsNeeded] = useState(null);
-
-  const location = useLocation();
 
   useEffect(() => {
     context.data.getCourse(id).then((data) => {
@@ -93,10 +91,7 @@ export default function UpdateCourse({ context }) {
             Update Course
           </button>
           <Link
-            to={{
-              pathname: `/`,
-              state: { prevPath: location.pathname },
-            }}
+            to={`/`}
             className='button button-secondary'
           >
             Cancel

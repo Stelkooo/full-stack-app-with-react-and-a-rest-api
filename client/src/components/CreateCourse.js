@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function CreateCourse({ context }) {
   const [title, setTitle] = useState(null);
@@ -7,9 +7,6 @@ export default function CreateCourse({ context }) {
   const [estimatedTime, setEstimatedTime] = useState(null);
   const [materialsNeeded, setMaterialsNeeded] = useState(null);
   const [errors, setErrors] = useState([]);
-
-  const location = useLocation();
-  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -88,10 +85,7 @@ export default function CreateCourse({ context }) {
           </button>
           <Link
             className='button button-secondary'
-            to={{
-              pathname: `/`,
-              state: { prevPath: location.pathname },
-            }}
+            to={`/`}
           >
             Cancel
           </Link>

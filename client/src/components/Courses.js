@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function Courses({ context }) {
   const [courses, setCourses] = useState([]);
-
-  const location = useLocation();
 
   useEffect(() => {
     context.data.getCourses().then((data) => setCourses(data));
@@ -18,10 +16,7 @@ export default function Courses({ context }) {
             <Link
               key={course.id}
               className='course--module course--link'
-              to={{
-                pathname: `/courses/${course.id}`,
-                state: { prevPath: location.pathname },
-              }}
+              to={`/courses/${course.id}`}
             >
               <h2 className='course--label'>Course</h2>
               <h3 className='course--title'>{course.title}</h3>
