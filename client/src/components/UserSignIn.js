@@ -57,15 +57,7 @@ export default function UserSignIn({ context }) {
         </form>
         <p>
           Don't have a user account? Click here to{' '}
-          <Link
-            to={{
-              pathname: `/signup`,
-              state: { prevPath: location.pathname },
-            }}
-          >
-            sign up
-          </Link>
-          !
+          <Link to={'/signup'}>sign up</Link>!
         </p>
       </div>
     </>
