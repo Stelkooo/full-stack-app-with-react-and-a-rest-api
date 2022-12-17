@@ -19,6 +19,7 @@ const UserSignUpWithContext = withContext(UserSignUp);
 const CreateCourseWithContext = withContext(CreateCourse);
 const UpdateCourseWithContext = withContext(UpdateCourse);
 const HeaderWithContext = withContext(Header);
+const UserSignOutWithContext = withContext(UserSignOut);
 
 const App = () => {
   return (
@@ -53,7 +54,7 @@ const App = () => {
           />
           <Route
             path='/signout'
-            element={<UserSignOut />}
+            element={<UserSignOutWithContext />}
           />
         </Routes>
       </main>

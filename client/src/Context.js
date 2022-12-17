@@ -25,7 +25,7 @@ export class Provider extends React.Component {
       actions: {
         getCourses: this.getCourses,
         signIn: this.signIn,
-        signUp: this.signUp,
+        signOut: this.signOut,
       },
     };
 
@@ -49,6 +49,10 @@ export class Provider extends React.Component {
       });
     }
     return user;
+  };
+
+  signOut = () => {
+    this.setState({ authenticatedUser: null });
   };
 }
 
