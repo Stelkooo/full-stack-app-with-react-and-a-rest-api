@@ -50,10 +50,7 @@ export default function UserSignIn({ context }) {
           </button>
           <Link
             className='button'
-            to={{
-              pathname: `/`,
-              state: { prevPath: location.pathname },
-            }}
+            to={`/`}
           >
             Cancel
           </Link>
