@@ -17,7 +17,10 @@ export class Provider extends React.Component {
   }
 
   render() {
+    const { authenticatedUser } = this.state;
+
     const value = {
+      authenticatedUser,
       data: this.data,
       actions: {
         getCourses: this.getCourses,

@@ -1,4 +1,3 @@
-import { createHashRouter } from 'react-router-dom';
 import apiBaseUrl from './config';
 
 export default class Data {
@@ -77,6 +76,20 @@ export default class Data {
     const response = await this.api(`/users`, 'POST', body, false, null);
     if (response.status === 201) {
       return this.getUser(body.emailAddress, body.password);
+    } else if (response.status === 400) {
+      return response.json().then((data) => data.errors);
+    } else {
+      throw new Error();
+    }
+  }
+
+  async createCourse(body, credentials) {
+    const response = await this.api(`/courses`, 'POST', body, true, {
+      username: credentials.emailAddress,
+      password: credentials.password,
+    });
+    if (response.status === 201) {
+      return [];
     } else if (response.status === 400) {
       return response.json().then((data) => data.errors);
     } else {
