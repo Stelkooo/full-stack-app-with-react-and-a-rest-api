@@ -18,11 +18,12 @@ const UserSignInWithContext = withContext(UserSignIn);
 const UserSignUpWithContext = withContext(UserSignUp);
 const CreateCourseWithContext = withContext(CreateCourse);
 const UpdateCourseWithContext = withContext(UpdateCourse);
+const HeaderWithContext = withContext(Header);
 
 const App = () => {
   return (
     <Router>
-      <Header />
+      <HeaderWithContext />
       <main>
         <Routes>
           <Route
