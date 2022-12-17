@@ -24,6 +24,7 @@ export default function UpdateCourse({ context }) {
       setMaterialsNeeded(data.materialsNeeded);
       setIsLoading(false);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleSubmit = (e) => {

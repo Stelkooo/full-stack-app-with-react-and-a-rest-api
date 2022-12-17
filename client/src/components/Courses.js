@@ -6,6 +6,7 @@ export default function Courses({ context }) {
 
   useEffect(() => {
     context.data.getCourses().then((data) => setCourses(data));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

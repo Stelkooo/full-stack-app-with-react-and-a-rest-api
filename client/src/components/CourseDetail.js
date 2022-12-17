@@ -14,6 +14,7 @@ export default function CourseDetail({ context }) {
       setCourse(data);
       setIsLoading(false);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleDeleteCourse = () => {
