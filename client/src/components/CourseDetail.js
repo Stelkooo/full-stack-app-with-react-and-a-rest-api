@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
 
 export default function CourseDetail({ context }) {
   const { id } = useParams();
@@ -15,32 +16,8 @@ export default function CourseDetail({ context }) {
     });
   }, []);
 
-  const formatDescription = () => {
-    if (course.description) {
-      const splitDescription = course.description.split('\n');
-      let blanksRemovedDescription = [];
-      splitDescription.forEach((e) => {
-        if (e !== '') {
-          blanksRemovedDescription.push(e);
-        }
-      });
-
-      return blanksRemovedDescription.map((e, index) => {
-        return <p key={index}>{e}</p>;
-      });
-    }
-  };
-
   const handleDeleteCourse = () => {
     context.data.deleteCourse(id);
-  };
-
-  const formatMaterialsNeeded = () => {
-    let splitMaterials = course.materialsNeeded.split('\n');
-
-    return splitMaterials.map((e, index) => {
-      return <li key={index}>{e.slice(2)}</li>;
-    });
   };
 
   return !isLoading ? (
@@ -82,7 +59,7 @@ export default function CourseDetail({ context }) {
               <p>
                 By {course.user.firstName} {course.user.lastName}
               </p>
-              {formatDescription()}
+              <ReactMarkdown>{course.description}</ReactMarkdown>
             </div>
             <div>
               <h3 className='course--detail--title'>Estimated Time</h3>
@@ -90,7 +67,7 @@ export default function CourseDetail({ context }) {
               <h3 className='course--detail--title'>Materials Needed</h3>
               {course.materialsNeeded ? (
                 <ul className='course--detail--list'>
-                  {formatMaterialsNeeded()}
+                  <ReactMarkdown>{course.materialsNeeded}</ReactMarkdown>
                 </ul>
               ) : (
                 <p>No materials needed</p>
