@@ -11,6 +11,7 @@ import UpdateCourse from './components/UpdateCourse';
 import UserSignOut from './components/UserSignOut';
 
 import withContext from './Context';
+import PrivateRoutes from './PrivateRoutes';
 
 const CoursesWithContext = withContext(Courses);
 const CourseDetailWithContext = withContext(CourseDetail);
@@ -32,14 +33,16 @@ const App = () => {
             path='/'
             element={<CoursesWithContext />}
           />
-          <Route
-            path='/courses/create'
-            element={<CreateCourseWithContext />}
-          />
-          <Route
-            path='/courses/:id/update'
-            element={<UpdateCourseWithContext />}
-          />
+          <Route element={<PrivateRoutes />}>
+            <Route
+              path='/courses/create'
+              element={<CreateCourseWithContext />}
+            />
+            <Route
+              path='/courses/:id/update'
+              element={<UpdateCourseWithContext />}
+            />
+          </Route>
           <Route
             path='/courses/:id'
             element={<CourseDetailWithContext />}
