@@ -47,18 +47,23 @@ export default function CourseDetail({ context }) {
     <>
       <div className='actions--bar'>
         <div className='wrap'>
-          <Link
-            className='button'
-            to={`/courses/${id}/update`}
-          >
-            Update Course
-          </Link>
-          <button
-            className='button'
-            onClick={handleDeleteCourse}
-          >
-            Delete Course
-          </button>
+          {context.authenticatedUser &&
+          context.authenticatedUser.id === course.userId ? (
+            <>
+              <Link
+                className='button'
+                to={`/courses/${id}/update`}
+              >
+                Update Course
+              </Link>
+              <button
+                className='button'
+                onClick={handleDeleteCourse}
+              >
+                Delete Course
+              </button>
+            </>
+          ) : null}
           <Link
             className='button button-secondary'
             to={`/`}
