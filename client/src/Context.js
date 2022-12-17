@@ -23,7 +23,6 @@ export class Provider extends React.Component {
       authenticatedUser,
       data: this.data,
       actions: {
-        getCourses: this.getCourses,
         signIn: this.signIn,
         signOut: this.signOut,
       },
@@ -33,11 +32,6 @@ export class Provider extends React.Component {
       <Context.Provider value={value}>{this.props.children}</Context.Provider>
     );
   }
-
-  getCourses = async () => {
-    const courses = await this.data.getCourses();
-    return courses;
-  };
 
   signIn = async (username, password) => {
     const user = await this.data.getUser(username, password);

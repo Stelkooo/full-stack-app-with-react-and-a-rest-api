@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
-export default function Courses({
-  context: {
-    actions: { getCourses },
-  },
-}) {
+export default function Courses({ context }) {
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
-    getCourses().then((data) => setCourses(data));
+    context.data.getCourses().then((data) => setCourses(data));
   }, []);
 
   return (
