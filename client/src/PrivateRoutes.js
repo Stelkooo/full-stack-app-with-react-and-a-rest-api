@@ -4,6 +4,7 @@ import { Consumer } from './Context';
 
 export default function PrivateRoutes() {
   const location = useLocation();
+  // only allow access to certain routes if user is authenticated
   return (
     <Consumer>
       {(context) =>

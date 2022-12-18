@@ -34,7 +34,12 @@ export class Provider extends React.Component {
       <Context.Provider value={value}>{this.props.children}</Context.Provider>
     );
   }
-
+  /* 
+    send a get request to the api to get the user information
+    if no 500 is returned and user returned is not null
+    return the user info, set the global authenticatedUser state to user
+    and update cookies and local storage
+  */
   signIn = async (username, password) => {
     const user = await this.data.getUser(username, password);
     if (user !== 500) {
@@ -51,6 +56,10 @@ export class Provider extends React.Component {
     return user;
   };
 
+  /*
+    set authenticatedUser to null
+    remove cookies and local storage
+  */
   signOut = () => {
     this.setState({ authenticatedUser: null });
     Cookies.remove('authenticatedUser');

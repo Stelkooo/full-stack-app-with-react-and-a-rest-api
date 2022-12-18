@@ -11,6 +11,12 @@ export default function CourseDetail({ context }) {
 
   const navigate = useNavigate();
 
+  /* 
+    on page load fetch course details based on id param
+    if no data is returned, send user to /notfound
+    if 500 is returned, send user to to /error
+    else display the course details
+  */
   useEffect(() => {
     context.data.getCourse(id).then((data) => {
       if (data === null) {
@@ -25,6 +31,12 @@ export default function CourseDetail({ context }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  /*
+    sends a delete request to the api to delete the course
+    if it was successful, send user to /
+    if the action was unauthorised or forbidden, send user to /forbidden
+    else send user to /error
+  */
   const handleDeleteCourse = () => {
     context.data
       .deleteCourse(id, {
@@ -46,23 +58,26 @@ export default function CourseDetail({ context }) {
     <>
       <div className='actions--bar'>
         <div className='wrap'>
-          {context.authenticatedUser &&
-          context.authenticatedUser.id === course.userId ? (
-            <>
-              <Link
-                className='button'
-                to={`/courses/${id}/update`}
-              >
-                Update Course
-              </Link>
-              <button
-                className='button'
-                onClick={handleDeleteCourse}
-              >
-                Delete Course
-              </button>
-            </>
-          ) : null}
+          {
+            // only display update and delete actions if user is authenticated and is the course owner
+            context.authenticatedUser &&
+            context.authenticatedUser.id === course.userId ? (
+              <>
+                <Link
+                  className='button'
+                  to={`/courses/${id}/update`}
+                >
+                  Update Course
+                </Link>
+                <button
+                  className='button'
+                  onClick={handleDeleteCourse}
+                >
+                  Delete Course
+                </button>
+              </>
+            ) : null
+          }
           <Link
             className='button button-secondary'
             to={`/`}

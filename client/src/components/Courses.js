@@ -7,6 +7,11 @@ export default function Courses({ context }) {
 
   const navigate = useNavigate();
 
+  /*
+    on page load fetch courses
+    if 500 is returned, send user to /error
+    else display the courses
+  */
   useEffect(() => {
     context.data.getCourses().then((res) => {
       if (res === 500) {

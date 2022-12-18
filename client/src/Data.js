@@ -31,7 +31,9 @@ export default class Data {
 
     return fetch(url, options);
   }
-
+  /*
+send get request to api to get all the courses
+  */
   async getCourses() {
     const response = await this.api('/courses', 'GET', null, false, null).catch(
       (err) => {
@@ -44,7 +46,9 @@ export default class Data {
       return 500;
     }
   }
-
+  /*
+send get request to api to get specific course
+  */
   async getCourse(id) {
     const response = await this.api(
       `/courses/${id}`,
@@ -61,7 +65,9 @@ export default class Data {
       return 500;
     }
   }
-
+  /*
+send delete request to api to delete a specific course
+  */
   async deleteCourse(id, credentials) {
     const response = await this.api(`/courses/${id}`, 'DELETE', null, true, {
       username: credentials.emailAddress,
@@ -71,7 +77,9 @@ export default class Data {
     });
     return response.status || 500;
   }
-
+  /*
+send get request to api to get user info
+  */
   async getUser(username, password) {
     const response = await this.api(`/users`, 'GET', null, true, {
       username,
@@ -87,7 +95,9 @@ export default class Data {
       return 500;
     }
   }
-
+  /*
+send post request to api to create a new user
+  */
   async createUser(body) {
     const response = await this.api(`/users`, 'POST', body, false, null).catch(
       (err) => {
@@ -102,7 +112,9 @@ export default class Data {
       return 500;
     }
   }
-
+  /*
+send post request to api to create a new course
+  */
   async createCourse(body, credentials) {
     const response = await this.api(`/courses`, 'POST', body, true, {
       username: credentials.emailAddress,
@@ -118,7 +130,9 @@ export default class Data {
       return 500;
     }
   }
-
+  /*
+send put request to api to update a course
+  */
   async updateCourse(id, body, credentials) {
     const response = await this.api(`/courses/${id}`, 'PUT', body, true, {
       username: credentials.emailAddress,

@@ -10,6 +10,12 @@ export default function CreateCourse({ context }) {
 
   const navigate = useNavigate();
 
+  /*
+    on form submit, send a post request to api
+    if an array is returned, display errors
+    if 500 is returned, send user to /error
+    else send user to /
+  */
   const handleSubmit = (e) => {
     e.preventDefault();
     const body = {

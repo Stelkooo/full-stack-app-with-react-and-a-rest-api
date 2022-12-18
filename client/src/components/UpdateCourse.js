@@ -15,6 +15,13 @@ export default function UpdateCourse({ context }) {
 
   const navigate = useNavigate();
 
+  /*
+    on page load get course details
+    if no data is returned, send user to /notfound
+    if 500 is returned, send user to /error
+    else if the course owner is the authenticated set the course states
+    else send user to /forbidden
+  */
   useEffect(() => {
     context.data.getCourse(id).then((data) => {
       if (data === null) {
@@ -37,6 +44,12 @@ export default function UpdateCourse({ context }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  /*
+    on form submit, send a put request to api
+    if an array is returned, display errors
+    if 500 is returned, send user to /error
+    else send user to /
+  */
   const handleSubmit = (e) => {
     e.preventDefault();
     const body = {

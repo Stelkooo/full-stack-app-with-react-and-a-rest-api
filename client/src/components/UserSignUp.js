@@ -11,6 +11,12 @@ export default function UserSignUp({ context }) {
   const navigate = useNavigate();
   const location = useLocation();
 
+  /*
+    on form submit, send a post request to api
+    if an array is returned, display errors
+    if 500 is returned, send user to /error
+    else sign the user in and send them to where they came from if it exists else /
+  */
   const handleSubmit = (e) => {
     e.preventDefault();
     const body = {
