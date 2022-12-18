@@ -24,9 +24,11 @@ export default function CreateCourse({ context }) {
         emailAddress: context.authenticatedUser?.emailAddress,
         password: localStorage.getItem('password'),
       })
-      .then((errors) => {
-        if (errors.length) {
-          setErrors(errors);
+      .then((res) => {
+        if (res.length) {
+          setErrors(res);
+        } else if (res === 500) {
+          navigate('/error');
         } else {
           navigate('/');
         }

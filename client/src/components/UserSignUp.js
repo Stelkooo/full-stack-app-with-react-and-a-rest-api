@@ -19,15 +19,21 @@ export default function UserSignUp({ context }) {
       emailAddress: username,
       password,
     };
-    context.data.createUser(body).then((errors) => {
-      if (errors.length) {
-        setErrors(errors);
+    context.data.createUser(body).then((res) => {
+      if (res.length) {
+        setErrors(res);
+      } else if (res === 500) {
+        navigate('/error');
       } else {
-        context.actions.signIn(body.emailAddress, body.password).then(() => {
-          if (location.state?.from) {
-            navigate(location.state.from);
+        context.actions.signIn(body.emailAddress, body.password).then((res) => {
+          if (res === 500) {
+            navigate('/error');
           } else {
-            navigate('/');
+            if (location.state?.from) {
+              navigate(location.state.from);
+            } else {
+              navigate('/');
+            }
           }
         });
       }

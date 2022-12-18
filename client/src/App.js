@@ -9,6 +9,9 @@ import UserSignUp from './components/UserSignUp';
 import CreateCourse from './components/CreateCourse';
 import UpdateCourse from './components/UpdateCourse';
 import UserSignOut from './components/UserSignOut';
+import NotFound from './components/NotFound';
+import Forbidden from './components/Forbidden';
+import UnhandledError from './components/UnhandledError';
 
 import withContext from './Context';
 import PrivateRoutes from './PrivateRoutes';
@@ -58,6 +61,18 @@ const App = () => {
           <Route
             path='/signout'
             element={<UserSignOutWithContext />}
+          />
+          <Route
+            path='*'
+            element={<NotFound />}
+          />
+          <Route
+            path='/forbidden'
+            element={<Forbidden />}
+          />
+          <Route
+            path='/error'
+            element={<UnhandledError />}
           />
         </Routes>
       </main>

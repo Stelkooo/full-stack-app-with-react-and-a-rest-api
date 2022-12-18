@@ -33,53 +33,73 @@ export default class Data {
   }
 
   async getCourses() {
-    const response = await this.api('/courses', 'GET', null, false, null);
-
+    const response = await this.api('/courses', 'GET', null, false, null).catch(
+      (err) => {
+        return 500;
+      },
+    );
     if (response.status === 200) {
       return response.json().then((data) => data.message);
     } else {
-      throw new Error();
+      return 500;
     }
   }
 
   async getCourse(id) {
-    const response = await this.api(`/courses/${id}`, 'GET', null, false, null);
-
+    const response = await this.api(
+      `/courses/${id}`,
+      'GET',
+      null,
+      false,
+      null,
+    ).catch((err) => {
+      return 500;
+    });
     if (response.status === 200) {
       return response.json().then((data) => data.message);
     } else {
-      throw new Error();
+      return 500;
     }
   }
 
-  async deleteCourse(id) {
-    const response = await this.api(`/courses/${id}`, 'DELETE');
-
-    return response.status;
+  async deleteCourse(id, credentials) {
+    const response = await this.api(`/courses/${id}`, 'DELETE', null, true, {
+      username: credentials.emailAddress,
+      password: credentials.password,
+    }).catch((err) => {
+      return 500;
+    });
+    return response.status || 500;
   }
 
   async getUser(username, password) {
     const response = await this.api(`/users`, 'GET', null, true, {
       username,
       password,
+    }).catch((err) => {
+      return 500;
     });
     if (response.status === 200) {
       return response.json().then((data) => data);
     } else if (response.status === 401) {
       return null;
     } else {
-      throw new Error();
+      return 500;
     }
   }
 
   async createUser(body) {
-    const response = await this.api(`/users`, 'POST', body, false, null);
+    const response = await this.api(`/users`, 'POST', body, false, null).catch(
+      (err) => {
+        return 500;
+      },
+    );
     if (response.status === 201) {
       return this.getUser(body.emailAddress, body.password);
     } else if (response.status === 400) {
       return response.json().then((data) => data.errors);
     } else {
-      throw new Error();
+      return 500;
     }
   }
 
@@ -87,13 +107,15 @@ export default class Data {
     const response = await this.api(`/courses`, 'POST', body, true, {
       username: credentials.emailAddress,
       password: credentials.password,
+    }).catch((err) => {
+      return 500;
     });
     if (response.status === 201) {
       return [];
     } else if (response.status === 400) {
       return response.json().then((data) => data.errors);
     } else {
-      throw new Error();
+      return 500;
     }
   }
 
@@ -101,6 +123,8 @@ export default class Data {
     const response = await this.api(`/courses/${id}`, 'PUT', body, true, {
       username: credentials.emailAddress,
       password: credentials.password,
+    }).catch((err) => {
+      return 500;
     });
     if (response.status === 204) {
       return [];
@@ -109,7 +133,7 @@ export default class Data {
     } else if (response.status === 400) {
       return response.json().then((data) => data.errors);
     } else {
-      throw new Error();
+      return 500;
     }
   }
 }

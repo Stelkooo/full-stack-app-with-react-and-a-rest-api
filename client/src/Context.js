@@ -37,14 +37,16 @@ export class Provider extends React.Component {
 
   signIn = async (username, password) => {
     const user = await this.data.getUser(username, password);
-    if (user !== null) {
-      this.setState(() => {
-        return {
-          authenticatedUser: user,
-        };
-      });
-      Cookies.set('authenticatedUser', JSON.stringify(user), { expires: 1 });
-      localStorage.setItem('password', password);
+    if (user !== 500) {
+      if (user !== null) {
+        this.setState(() => {
+          return {
+            authenticatedUser: user,
+          };
+        });
+        Cookies.set('authenticatedUser', JSON.stringify(user), { expires: 1 });
+        localStorage.setItem('password', password);
+      }
     }
     return user;
   };

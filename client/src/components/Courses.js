@@ -1,15 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Courses({ context }) {
   const [courses, setCourses] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
-    context.data.getCourses().then((data) => setCourses(data));
+    context.data.getCourses().then((res) => {
+      if (res === 500) {
+        navigate('/error');
+      } else {
+        setCourses(res);
+        setIsLoading(false);
+      }
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return (
+  return !isLoading ? (
     <>
       <div className='wrap main--grid'>
         {courses.map((course) => {
@@ -44,5 +54,5 @@ export default function Courses({ context }) {
         </a>
       </div>
     </>
-  );
+  ) : null;
 }

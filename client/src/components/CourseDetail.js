@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 
@@ -9,16 +9,37 @@ export default function CourseDetail({ context }) {
   const [course, setCourse] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     context.data.getCourse(id).then((data) => {
-      setCourse(data);
-      setIsLoading(false);
+      if (data === null) {
+        navigate('/notfound');
+      } else if (data === 500) {
+        navigate('/error');
+      } else {
+        setCourse(data);
+        setIsLoading(false);
+      }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleDeleteCourse = () => {
-    context.data.deleteCourse(id);
+    context.data
+      .deleteCourse(id, {
+        emailAddress: context.authenticatedUser?.emailAddress,
+        password: localStorage.getItem('password'),
+      })
+      .then((res) => {
+        if (res === 204) {
+          navigate('/');
+        } else if (res === 401 || res === 403) {
+          navigate('/forbidden');
+        } else {
+          navigate('/error');
+        }
+      });
   };
 
   return !isLoading ? (

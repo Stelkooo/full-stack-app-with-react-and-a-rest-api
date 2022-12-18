@@ -10,9 +10,11 @@ export default function UserSignIn({ context }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    context.actions.signIn(username, password).then((user) => {
-      if (user === null) {
+    context.actions.signIn(username, password).then((res) => {
+      if (res === null) {
         console.log('Sign-in failed');
+      } else if (res === 500) {
+        navigate('/error');
       } else {
         if (location.state?.from) {
           navigate(location.state.from);

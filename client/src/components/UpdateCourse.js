@@ -17,12 +17,22 @@ export default function UpdateCourse({ context }) {
 
   useEffect(() => {
     context.data.getCourse(id).then((data) => {
-      setCourse(data);
-      setTitle(data.title);
-      setDescription(data.description);
-      setEstimatedTime(data.estimatedTime);
-      setMaterialsNeeded(data.materialsNeeded);
-      setIsLoading(false);
+      if (data === null) {
+        navigate('/notfound');
+      } else if (data === 500) {
+        navigate('/error');
+      } else {
+        if (data.userId === context.authenticatedUser.id) {
+          setCourse(data);
+          setTitle(data.title);
+          setDescription(data.description);
+          setEstimatedTime(data.estimatedTime);
+          setMaterialsNeeded(data.materialsNeeded);
+          setIsLoading(false);
+        } else {
+          navigate('/forbidden');
+        }
+      }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -41,13 +51,16 @@ export default function UpdateCourse({ context }) {
         emailAddress: context.authenticatedUser?.emailAddress,
         password: localStorage.getItem('password'),
       })
-      .then((errors) => {
-        if (errors.length) {
-          setErrors(errors);
+      .then((res) => {
+        if (res.length) {
+          setErrors(res);
+        } else if (res === 500) {
+          navigate('/errors');
         } else {
           navigate('/');
         }
-      });
+      })
+      .catch(navigate('/error'));
   };
 
   return !isLoading ? (

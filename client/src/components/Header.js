@@ -18,7 +18,7 @@ export default function Header({ context }) {
               ) : (
                 <Link
                   to={`/signup`}
-                  state={{ from: location.pathname }}
+                  state={{ from: location.state?.from }}
                 >
                   Sign Up
                 </Link>
