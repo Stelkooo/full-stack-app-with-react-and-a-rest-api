@@ -1,3 +1,3 @@
-const apiBaseUrl = 'http://localhost:5000/api';
+const apiBaseUrl = 'https://fiery-year-production.up.railway.app/api';
 
 export default apiBaseUrl;
