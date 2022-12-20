@@ -28,7 +28,7 @@ export default function CreateCourse({ context }) {
     context.data
       .createCourse(body, {
         emailAddress: context.authenticatedUser?.emailAddress,
-        password: localStorage.getItem('password'),
+        password: context.authenticatedUser?.password,
       })
       .then((res) => {
         if (res.length) {

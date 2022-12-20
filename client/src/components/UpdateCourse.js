@@ -62,7 +62,7 @@ export default function UpdateCourse({ context }) {
     context.data
       .updateCourse(id, body, {
         emailAddress: context.authenticatedUser?.emailAddress,
-        password: localStorage.getItem('password'),
+        password: context.authenticatedUser?.password,
       })
       .then((res) => {
         if (res.length) {

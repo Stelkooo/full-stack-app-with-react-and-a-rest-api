@@ -41,7 +41,7 @@ export default function CourseDetail({ context }) {
     context.data
       .deleteCourse(id, {
         emailAddress: context.authenticatedUser?.emailAddress,
-        password: localStorage.getItem('password'),
+        password: context.authenticatedUser?.password,
       })
       .then((res) => {
         if (res === 204) {

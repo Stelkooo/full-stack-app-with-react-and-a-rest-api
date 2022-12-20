@@ -44,13 +44,13 @@ export class Provider extends React.Component {
     const user = await this.data.getUser(username, password);
     if (user !== 500) {
       if (user !== null) {
+        user.password = password;
         this.setState(() => {
           return {
             authenticatedUser: user,
           };
         });
         Cookies.set('authenticatedUser', JSON.stringify(user), { expires: 1 });
-        localStorage.setItem('password', password);
       }
     }
     return user;
@@ -63,7 +63,6 @@ export class Provider extends React.Component {
   signOut = () => {
     this.setState({ authenticatedUser: null });
     Cookies.remove('authenticatedUser');
-    localStorage.removeItem('password');
   };
 }
 
