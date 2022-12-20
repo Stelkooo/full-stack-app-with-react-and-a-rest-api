@@ -65,6 +65,7 @@ export default function UpdateCourse({ context }) {
         password: context.authenticatedUser?.password,
       })
       .then((res) => {
+        console.log(res);
         if (res.length) {
           setErrors(res);
         } else if (res === 500) {
@@ -72,8 +73,7 @@ export default function UpdateCourse({ context }) {
         } else {
           navigate('/');
         }
-      })
-      .catch(navigate('/error'));
+      });
   };
 
   return !isLoading ? (
