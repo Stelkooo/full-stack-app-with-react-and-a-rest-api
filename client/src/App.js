@@ -66,6 +66,10 @@ const App = () => {
             element={<UserSignOutWithContext />}
           />
           <Route
+            path='/notfound'
+            element={<NotFound />}
+          />
+          <Route
             path='*'
             element={<NotFound />}
           />
