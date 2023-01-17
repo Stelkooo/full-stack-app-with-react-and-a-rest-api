@@ -27,7 +27,7 @@
 
 ## About The Project
 
-[![Product Name Screen Shot]](https://github.com/Stelkooo/full-stack-app-with-react-and-a-rest-api/blob/main/client/public/screenshot.png)
+![Product Name Screen Shot](https://github.com/Stelkooo/full-stack-app-with-react-and-a-rest-api/blob/main/client/public/screenshot.png)
 
 In this **Treehouse Tech Degree** project I created a React App to display a courses databases with REST API, which I created in a previous project.
 
