@@ -1,3 +1,3 @@
-const apiBaseUrl = 'https://fiery-year-production.up.railway.app/api';
+const apiBaseUrl = 'https://api-production-552a.up.railway.app/';
 
 export default apiBaseUrl;
